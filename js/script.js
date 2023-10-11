@@ -6,35 +6,113 @@ var startButton = document.getElementById("startbutton");
 var leaderboardEl = document.getElementById("leaderboard");
 var quizEl = document.getElementById("quiz");
 var startScreenEl = document.getElementById("startscreen");
-var timeRemaining = 10;
+var timeRemaining = 20;
 var timeEl = document.getElementById("timer");
+var timerInterval;
 
 //Question bank
 var question1 = {
-    title: "What is your name?",
+    title: "What does addEventListener do?",
     choices: {
-        a: "Heather",
-        b: "Halle",
-        c: "Brian"
+        a: "attaches to an element and listens for an event",
+        b: "adds an element called Listener to the document",
+        c: "names a function"
     },
     answer: "a"
 };
 
 var question2 = {
-    title: "What is your favorite color?",
+    title: "How would you call the timer function?",
     choices: {
-        a: "Teal",
-        b: "Pink",
-        c: "Purple",
+        a: "()timer",
+        b: "timer{}",
+        c: "timer()",
     },
     answer: "c"
 };
 
+var question3 = {
+    title: "Which of these most closely defines what Javascript does for a webpage?",
+    choices: {
+        a: "creates the structure of the webpage",
+        b: "specifies the look of the webpage",
+        c: "adds interactivity to the webpage",
+    },
+    answer: "c"
+};
 
+var question4 = {
+    title: "Which variable cannot be reassigned?",
+    choices: {
+        a: "let",
+        b: "const",
+        c: "var",
+    },
+    answer: "b"
+};
+
+var question5 = {
+    title: "How could you log the string 'hello World' to the console?",
+    choices: {
+        a: "helloworld.console;",
+        b: "console.log('hello World');",
+        c: "console.helloworld.log",
+    },
+    answer: "b"
+};
+
+var question6 = {
+    title: "What is the HTML tag for linking to the Javascript?",
+    choices: {
+        a: "<script>",
+        b: "<java>",
+        c: "<js>",
+    },
+    answer: "a"
+};
+
+var question7 = {
+    title: "Which of these means 'and'?",
+    choices: {
+        a: "||",
+        b: "&",
+        c: "&&",
+    },
+    answer: "c"
+};
+
+var question8 = {
+    title: "What is there difference between '==' and '==='?",
+    choices: {
+        a: "They are functionally the same",
+        b: "Both compare values but '===' is type strict where '==' is not",
+        c: "'===' compares types where '==' compares value",
+    },
+    answer: "b"
+};
+
+var question9 = {
+    title: "How do you write an IF statement?",
+    choices: {
+        a: "if (a == b)",
+        b: "if {a == b}",
+        c: "if a == b;",
+    },
+    answer: "a"
+};
+
+var question10 = {
+    title: "Can you learn Javascript?",
+    choices: {
+        a: "Yes!",
+        b: "No!",
+    },
+    answer: "a"
+}
 
 //question order
-var questionOrder = [question1, question2];
-//, question3, question4, question5, question6, question7, question8, question9, question10
+var questionOrder = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+
 
 //start quiz function
 startButton.addEventListener("click", function() {
@@ -82,6 +160,7 @@ function processAnswer(event) {
 
 
 function endOfQuiz() {
+    clearInterval(timerInterval);
     leaderboardEl.style.display = "block";
     quizEl.style.display = "none";
     let playerName = window.prompt("Please enter your name to store your score.");
@@ -119,11 +198,11 @@ function displayLeaderboard(highScoreList) {
 //timer function
 function timer() {
     // Sets interval in variable
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
       timeRemaining--;
       var secondsDisplay; 
       var minutes = Math.floor(timeRemaining / 60);
-      var seconds = timeRemaining - (minutes * 60);
+      var seconds = timeRemaining % 60;
       if (seconds < 10) {secondsDisplay = "0" + seconds;}
       else {secondsDisplay = seconds;}
 
@@ -131,7 +210,6 @@ function timer() {
   
       if(timeRemaining === 0) {
         // Stops execution of action at set interval
-        clearInterval(timerInterval);
         endOfQuiz();
       }
   
