@@ -6,7 +6,7 @@ var startButton = document.getElementById("startbutton");
 var leaderboardEl = document.getElementById("leaderboard");
 var quizEl = document.getElementById("quiz");
 var startScreenEl = document.getElementById("startscreen");
-var timeRemaining = 20;
+var timeRemaining = 180;
 var timeEl = document.getElementById("timer");
 var timerInterval;
 
@@ -14,9 +14,9 @@ var timerInterval;
 var question1 = {
     title: "What does addEventListener do?",
     choices: {
-        a: "attaches to an element and listens for an event",
-        b: "adds an element called Listener to the document",
-        c: "names a function"
+        a: "Attaches to an element and listens for an event",
+        b: "Adds an element called Listener to the document",
+        c: "Names a function"
     },
     answer: "a"
 };
@@ -34,9 +34,9 @@ var question2 = {
 var question3 = {
     title: "Which of these most closely defines what Javascript does for a webpage?",
     choices: {
-        a: "creates the structure of the webpage",
-        b: "specifies the look of the webpage",
-        c: "adds interactivity to the webpage",
+        a: "Creates the structure of the webpage",
+        b: "Specifies the look of the webpage",
+        c: "Adds interactivity to the webpage",
     },
     answer: "c"
 };
