@@ -2,7 +2,12 @@
 var choicesElement = document.getElementById("choices");
 var questionIndex = 0;
 var quizGrade = 0;
-
+var startButton = document.getElementById("startbutton");
+var leaderboardEl = document.getElementById("leaderboard");
+var quizEl = document.getElementById("quiz");
+var startScreenEl = document.getElementById("startscreen");
+var timeRemaining = 10;
+var timeEl = document.getElementById("timer");
 
 //Question bank
 var question1 = {
@@ -25,11 +30,24 @@ var question2 = {
     answer: "c"
 };
 
-document.getElementById("leaderboard").style.display = "none";
+
 
 //question order
 var questionOrder = [question1, question2];
 //, question3, question4, question5, question6, question7, question8, question9, question10
+
+//start quiz function
+startButton.addEventListener("click", function() {
+    startScreenEl.style.display = "none";
+    quizEl.style.display = "block";
+    displayQuiz(question1);
+    timer();
+});
+
+// document.getElementById("leaderboard").style.display = "none";
+// document.getElementById("quiz").style.display = "none";
+
+
 
 //function to display questions one at a time
 function displayQuiz(question) {
@@ -64,8 +82,8 @@ function processAnswer(event) {
 
 
 function endOfQuiz() {
-    document.getElementById("leaderboard").style.display = 'block';
-
+    leaderboardEl.style.display = "block";
+    quizEl.style.display = "none";
     let playerName = window.prompt("Please enter your name to store your score.");
         while (playerName < 1 || playerName > 24) {
             playerName = window.prompt("Please enter a name between 1 and 24 characters.");
@@ -73,6 +91,7 @@ function endOfQuiz() {
         displayLeaderboard(saveHighScores(playerName));
 }
 
+//function for saving your score
 function saveHighScores(playerName) {
     const highScoreList = JSON.parse(localStorage.getItem("highscores")) ?? [];
     const newHighScore = { quizGrade, playerName };
@@ -82,9 +101,11 @@ function saveHighScores(playerName) {
     return highScoreList;
 }
 
+//function for displaying high scores
 function displayLeaderboard(highScoreList) {
     var leaderboard = document.getElementById("highscores");
     leaderboard.innerHTML = "";
+    
 
     Object.entries(highScoreList).forEach(([id, score]) => {
         if (parseInt(id) >= 10) return;
@@ -94,6 +115,28 @@ function displayLeaderboard(highScoreList) {
         leaderboard.appendChild(scoreItem);
     });
 }
+
+//timer function
+function timer() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+      timeRemaining--;
+      var secondsDisplay; 
+      var minutes = Math.floor(timeRemaining / 60);
+      var seconds = timeRemaining - (minutes * 60);
+      if (seconds < 10) {secondsDisplay = "0" + seconds;}
+      else {secondsDisplay = seconds;}
+
+      timeEl.innerHTML = minutes + ":" + secondsDisplay;
+  
+      if(timeRemaining === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        endOfQuiz();
+      }
+  
+    }, 1000);
+  }
 
 //NOTES
 // //what do i need to know for a leaderboard?
@@ -108,4 +151,4 @@ function displayLeaderboard(highScoreList) {
 
 
 //starts the quiz
-displayQuiz(question1);
+

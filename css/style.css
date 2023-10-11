@@ -1,0 +1,11 @@
+#startscreen {
+    display: block;
+}
+
+#quiz {
+    display: none;
+}
+
+#leaderboard {
+    display: none;
+}

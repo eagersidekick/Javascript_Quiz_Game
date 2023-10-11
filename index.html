@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="quiz">
+    <div id="startscreen">
+        <h1>Ready to test your javascript knowledge?</h1>
+        <button id="startbutton">Start Quiz</button>
+    </div>
+    <div id="quiz">
+        <p id="timer"></p>
         <h1 id="question"></h1>
         <div id="choices" name="0"></div>
         <div id="score"></div>
         <div id="message"></div>
     </div>
     <div id="leaderboard">
-        <h2>leaderboard</h2>
+        <h2>Leaderboard</h2>
         <ol id="highscores"></ol>
     </div>
     <script src="./js/script.js"></script>
