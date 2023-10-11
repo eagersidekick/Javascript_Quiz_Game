@@ -3,6 +3,7 @@ var choicesElement = document.getElementById("choices");
 var questionIndex = 0;
 var quizGrade = 0;
 
+
 //Question bank
 var question1 = {
     title: "What is your name?",
@@ -23,6 +24,8 @@ var question2 = {
     },
     answer: "c"
 };
+
+document.getElementById("leaderboard").style.display = "none";
 
 //question order
 var questionOrder = [question1, question2];
@@ -53,14 +56,56 @@ function processAnswer(event) {
     else document.getElementById("message").innerHTML = "Sorry, you got it wrong!";
         document.getElementById("score").innerHTML = "Your score: " + quizGrade + " out of 100";
     questionIndex++;
-    if (questionOrder.length === questionIndex) displayLeaderboard();
+    if (questionOrder.length === questionIndex) endOfQuiz();
     else displayQuiz(questionOrder[questionIndex]);
 }
 
 //function for displaying the leaderboard
-function displayLeaderboard() {
 
+
+function endOfQuiz() {
+    document.getElementById("leaderboard").style.display = 'block';
+
+    let playerName = window.prompt("Please enter your name to store your score.");
+        while (playerName < 1 || playerName > 24) {
+            playerName = window.prompt("Please enter a name between 1 and 24 characters.");
+        }
+        displayLeaderboard(saveHighScores(playerName));
 }
+
+function saveHighScores(playerName) {
+    const highScoreList = JSON.parse(localStorage.getItem("highscores")) ?? [];
+    const newHighScore = { quizGrade, playerName };
+    highScoreList.push(newHighScore);
+    highScoreList.sort((a, b) => b.quizGrade - a.quizGrade);
+    localStorage.setItem("highscores", JSON.stringify(highScoreList));
+    return highScoreList;
+}
+
+function displayLeaderboard(highScoreList) {
+    var leaderboard = document.getElementById("highscores");
+    leaderboard.innerHTML = "";
+
+    Object.entries(highScoreList).forEach(([id, score]) => {
+        if (parseInt(id) >= 10) return;
+        
+        var scoreItem = document.createElement('li');
+        scoreItem.innerHTML = score.quizGrade + " - " + score.playerName;
+        leaderboard.appendChild(scoreItem);
+    });
+}
+
+//NOTES
+// //what do i need to know for a leaderboard?
+// playerscore
+// playernames
+// last 10 highscores + last 10 playernames
+
+// //what does my scoreboard need to do?
+// store 10 highest scores
+// check current score and compare against the last 10 high scores
+// replace the lowest highscore and reorder list
+
 
 //starts the quiz
 displayQuiz(question1);
