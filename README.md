@@ -2,7 +2,7 @@
 Javascript Quiz with a highscore board
 
 ## Description
-This webpage acts as a timed quiz for practicing javascript skills. Users can access the quiz by clicking on the "Ready to test your Javascript knowledge" button on the homescreen and navigating through the quiz. Once the quiz is over, the user's score is shown on a leaderboard that compares scores to those already in local storage.
+This webpage acts as a timed quiz for practicing javascript skills. Users can access the quiz by clicking on the "click to test your Javascript knowledge" button on the homescreen and navigating through the quiz. Once the quiz is over, the user's score is shown on a leaderboard that compares scores to those already in local storage.
 
 ## User Story
 AS A coding boot camp student
@@ -22,7 +22,7 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and my score
 
-## Screenshot
+## Screenshots
 ![startscreen](Images/image.png)
 ![quiz start](Images/image-1.png)
 
