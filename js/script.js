@@ -149,8 +149,9 @@ function processAnswer(event) {
         document.getElementById("score").innerHTML = "Your score: " + quizGrade + " out of 100";
         document.getElementById("message").innerHTML = "Congrats! That's correct!";
     }
-    else document.getElementById("message").innerHTML = "Sorry, you got it wrong!";
+    else document.getElementById("message").innerHTML = "Sorry, you got it wrong! -10 seconds.";
         document.getElementById("score").innerHTML = "Your score: " + quizGrade + " out of 100";
+        timeRemaining -= 10;
     questionIndex++;
     if (questionOrder.length === questionIndex) endOfQuiz();
     else displayQuiz(questionOrder[questionIndex]);
